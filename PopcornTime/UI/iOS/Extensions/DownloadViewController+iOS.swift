@@ -139,7 +139,7 @@ extension DownloadViewController: DownloadDetailTableViewCellDelegate {
         }
         
         if let image = image, let url = URL(string: image) {
-            cell.imageView?.af_setImage(withURL: url)
+            cell.imageView?.af.setImage(withURL: url)
         } else {
             cell.imageView?.image = UIImage(named: "Episode Placeholder")
         }
@@ -172,7 +172,7 @@ extension DownloadViewController: DownloadDetailTableViewCellDelegate {
             segue.identifier == "showDetail",
             let cell = sender as? UITableViewCell,
             let indexPath = tableView.indexPath(for: cell) {
-            destination.show = activeDataSource(in: indexPath.section)[indexPath.row] as! Show
+            destination.show = activeDataSource(in: indexPath.section)[indexPath.row] as? Show
         }
     }
 }

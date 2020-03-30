@@ -66,7 +66,7 @@ extension DownloadCollectionViewCell: CellCustomizing {
         self.downloadState = DownloadButton.buttonState(download.downloadStatus)
 
         if let image = download.mediaMetadata[MPMediaItemPropertyArtwork] as? String, let url = URL(string: image) {
-            self.imageView?.af_setImage(withURL: url)
+            self.imageView?.af.setImage(withURL: url)
         } else {
             self.imageView?.image = UIImage(named: "Episode Placeholder")
         }

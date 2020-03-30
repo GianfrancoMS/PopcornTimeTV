@@ -103,7 +103,7 @@ class MainViewController: UIViewController, CollectionViewControllerDelegate {
                     destination.loadView() // Initialize the @IBOutlets
                     
                     if let image = media.smallCoverImage, let url = URL(string: image) {
-                        destination.backgroundImageView.af_setImage(withURL: url)
+                        destination.backgroundImageView.af.setImage(withURL: url)
                     }
                     
                     destination.titleLabel.text = media.title

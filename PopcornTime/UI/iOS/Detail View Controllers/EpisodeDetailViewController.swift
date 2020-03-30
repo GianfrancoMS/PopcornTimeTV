@@ -63,7 +63,7 @@ class EpisodeDetailViewController: UIViewController, UIScrollViewDelegate, UIGes
         
         if let image = episode.largeBackgroundImage,
             let url = URL(string: image) {
-            imageView.af_setImage(withURL: url, placeholderImage: UIImage(named: "Episode Placeholder"), imageTransition: .crossDissolve(.default))
+            imageView.af.setImage(withURL: url, placeholderImage: UIImage(named: "Episode Placeholder"), imageTransition: .crossDissolve(.default))
         }
         
         scrollView.setNeedsLayout()

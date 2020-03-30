@@ -87,7 +87,7 @@ extension MonogramCollectionViewCell: CellCustomizing {
             self.originalImage = UIImage(named: "Other Placeholder")
 
             ImageDownloader.default.download(request) { (response) in
-                self.originalImage = response.result.value
+                self.originalImage = response.value
             }
         } else {
             self.originalImage = nil

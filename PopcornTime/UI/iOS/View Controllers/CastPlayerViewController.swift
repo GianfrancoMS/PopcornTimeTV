@@ -301,8 +301,8 @@ class CastPlayerViewController: UIViewController, GCKRemoteMediaClientListener, 
         elapsedTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         
         if let image = media.largeCoverImage, let url = URL(string: image) {
-            imageView.af_setImage(withURL: url)
-            backgroundImageView.af_setImage(withURL: url)
+            imageView.af.setImage(withURL: url)
+            backgroundImageView.af.setImage(withURL: url)
         }
     }
     

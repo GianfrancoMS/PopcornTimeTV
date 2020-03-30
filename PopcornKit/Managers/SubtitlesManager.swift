@@ -21,14 +21,11 @@ open class SubtitlesManager: NetworkManager {
 
         let queue = DispatchQueue(label: "com.popcorn-time.response.queue", attributes: DispatchQueue.Attributes.concurrent)
         self.manager.request(OpenSubtitles.base + OpenSubtitles.search + params.compactMap({ "\($0)-\($1)" }).joined(separator: "/"), headers: OpenSubtitles.defaultHeaders).validate().responseJSON(queue: queue) { response in
-            guard
-                    let value = response.result.value,
-                    let status = response.response?.statusCode,
-                    response.result.isSuccess && status == 200
-                    else {
-                return DispatchQueue.main.async {
-                    completion([:], response.result.error as NSError?)
+            guard case .success(let value) = response.result else {
+                DispatchQueue.main.async {
+                    completion([:], response.error as NSError?)
                 }
+                return
             }
 
             let subtitles = Mapper<Subtitle>().mapArray(JSONObject: value) ?? [Subtitle]()

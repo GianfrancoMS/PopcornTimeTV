@@ -2006,8 +2006,8 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PopcornTimeiOS/Pods-PopcornTimeiOS-resources.sh",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastUIResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.7_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.7_static/GoogleCast.framework/GoogleCastUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -2030,7 +2030,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage-iOS/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireNetworkActivityIndicator/AlamofireNetworkActivityIndicator.framework",
-				"${BUILT_PRODUCTS_DIR}/FloatRatingView-iOS/FloatRatingView.framework",
+				"${BUILT_PRODUCTS_DIR}/FloatRatingView/FloatRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/GCDWebServer-iOS/GCDWebServer.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel-iOS/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/OBSlider/OBSlider.framework",
@@ -2076,7 +2076,6 @@
 				"${PODS_ROOT}/Target Support Files/Pods-PopcornTimetvOS/Pods-PopcornTimetvOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-tvOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage-tvOS/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/FloatRatingView-tvOS/FloatRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/GCDWebServer-tvOS/GCDWebServer.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel-tvOS/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper-tvOS/ObjectMapper.framework",
@@ -2093,7 +2092,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FloatRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
@@ -2118,8 +2116,8 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PopcornKit iOS/Pods-PopcornKit iOS-resources.sh",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
-				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.6_static/GoogleCast.framework/GoogleCastUIResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.7_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk-no-bluetooth/GoogleCastSDK-ios-4.4.7_static/GoogleCast.framework/GoogleCastUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -2882,7 +2880,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = appletvos;
@@ -2931,7 +2929,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -3093,7 +3091,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/PopcornKit/Supporting Files/iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "$(SRCROOT)/PopcornKit/Supporting Files/PopcornKit.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.popcorntimetv.popcornkit;
@@ -3127,7 +3125,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/PopcornKit/Supporting Files/iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "$(SRCROOT)/PopcornKit/Supporting Files/PopcornKit.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.popcorntimetv.popcornkit;
@@ -3227,7 +3225,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/PopcornTime/Supporting Files/iOS.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.popcorntimetv.popcorntime81.ios;
 				PRODUCT_NAME = PopcornTime;
@@ -3260,7 +3258,7 @@
 				EXPANDED_CODE_SIGN_IDENTITY = "-";
 				EXPANDED_CODE_SIGN_IDENTITY_NAME = "-";
 				INFOPLIST_FILE = "$(SRCROOT)/PopcornTime/Supporting Files/iOS.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.popcorntimetv.popcorntime81.ios;
 				PRODUCT_NAME = PopcornTime;

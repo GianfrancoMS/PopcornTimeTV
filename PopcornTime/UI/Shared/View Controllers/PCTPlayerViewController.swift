@@ -534,7 +534,7 @@ class PCTPlayerViewController: UIViewController, VLCMediaPlayerDelegate, UIGestu
                 self?.nextEpisode?.largeBackgroundImage = image
                     
                 if let image = image, let url = URL(string: image) {
-                    vc?.imageView.af_setImage(withURL: url)
+                    vc?.imageView.af.setImage(withURL: url)
                 }
                 
                 self?.nextEpisode?.getSubtitles { (subtitles) in

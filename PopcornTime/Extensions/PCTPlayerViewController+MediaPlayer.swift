@@ -62,7 +62,7 @@ extension PCTPlayerViewController {
         
         if let image = media.mediumCoverImage ?? media.mediumBackgroundImage, let request = try? URLRequest(url: image, method: .get) {
             ImageDownloader.default.download(request) { (response) in
-                guard let image = response.result.value else { return }
+                guard let image = response.value else { return }
                 if #available(iOS 10.0, tvOS 10.0, *) {
                     self.nowPlayingInfo?[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size) { (_) -> UIImage in
                         return image

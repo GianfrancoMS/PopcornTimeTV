@@ -21,7 +21,7 @@ extension ItemViewController {
         summaryTextView.text = media.summary
         
         if let image = media.mediumCoverImage, let url = URL(string: image) {
-            imageView?.af_setImage(withURL: url)
+            imageView?.af.setImage(withURL: url)
         }
         
         if let movie = media as? Movie {

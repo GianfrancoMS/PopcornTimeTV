@@ -85,7 +85,7 @@ extension AppDelegate: PCTPlayerViewControllerDelegate, UIViewControllerTransiti
         }
 
         if let image = backgroundImage, let url = URL(string: image) {
-            loadingViewController.backgroundImageView?.af_setImage(withURL: url)
+            loadingViewController.backgroundImageView?.af.setImage(withURL: url)
         }
         loadingViewController.titleLabel.text = media.title
         loadingViewController.modalPresentationStyle = .fullScreen
@@ -104,7 +104,6 @@ extension AppDelegate: PCTPlayerViewControllerDelegate, UIViewControllerTransiti
         let finishedLoading: (PreloadTorrentViewController, UIViewController) -> Void = { (loadingVc, playerVc) in
             // Enable here, so playerVc behavior is unchanged.
             UIApplication.shared.isIdleTimerDisabled = false
-            let flag = UIDevice.current.userInterfaceIdiom != .tv
             loadingVc.dismiss(animated: false) {
                 self.activeRootViewController?.present(playerVc, animated: true)
             }

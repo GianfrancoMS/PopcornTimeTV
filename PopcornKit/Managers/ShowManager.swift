@@ -1,12 +1,10 @@
-
-
 import ObjectMapper
 
 open class ShowManager: NetworkManager {
-    
+
     /// Creates new instance of ShowManager class
     public static let shared = ShowManager()
-    
+
     /// Possible filters used in API call.
     public enum Filters: String {
         case popularity = "popularity"
@@ -14,9 +12,9 @@ open class ShowManager: NetworkManager {
         case date = "updated"
         case rating = "rating"
         case trending = "trending"
-        
+
         public static let array = [trending, popularity, rating, date, year]
-        
+
         public var string: String {
             switch self {
             case .popularity:
@@ -32,7 +30,7 @@ open class ShowManager: NetworkManager {
             }
         }
     }
-    
+
     /**
      Load TV Shows from API.
      
@@ -45,22 +43,26 @@ open class ShowManager: NetworkManager {
      - Parameter completion: Completion handler for the request. Returns array of shows upon success, error upon failure.
      */
     open func load(
-        _ page: Int,
-        filterBy filter: Filters,
-        genre: Genres,
-        searchTerm: String?,
-        orderBy order: Orders,
-        completion: @escaping ([Show]?, NSError?) -> Void) {
+            _ page: Int,
+            filterBy filter: Filters,
+            genre: Genres,
+            searchTerm: String?,
+            orderBy order: Orders,
+            completion: @escaping ([Show]?, NSError?) -> Void) {
         var params: [String: Any] = ["sort": filter.rawValue, "genre": genre.rawValue.replacingOccurrences(of: " ", with: "-").lowercased(), "order": order.rawValue]
-        if let searchTerm = searchTerm , !searchTerm.isEmpty {
+        if let searchTerm = searchTerm, !searchTerm.isEmpty {
             params["keywords"] = searchTerm
         }
         self.manager.request(PopcornShows.base + PopcornShows.shows + "/\(page)", method: .get, parameters: params).validate().responseJSON { response in
-            guard let value = response.result.value else {completion(nil, response.result.error as NSError?); return}
-            completion(Mapper<Show>().mapArray(JSONObject: value), nil)
+            switch response.result {
+            case .success(let value):
+                completion(Mapper<Show>().mapArray(JSONObject: value), nil)
+            case .failure(let error):
+                completion(nil, error as NSError?)
+            }
         }
     }
-    
+
     /**
      Get more show information.
      
@@ -69,14 +71,18 @@ open class ShowManager: NetworkManager {
      - Parameter completion:    Completion handler for the request. Returns show upon success, error upon failure.
      */
     open func getInfo(_ imdbId: String, completion: @escaping (Show?, NSError?) -> Void) {
-            self.manager.request(PopcornShows.base + PopcornShows.show + "/\(imdbId)", method: .get).validate().responseJSON { response in
-                guard let value = response.result.value else {completion(nil, response.result.error as NSError?); return}
-                DispatchQueue.global(qos:.background).async{
+        self.manager.request(PopcornShows.base + PopcornShows.show + "/\(imdbId)", method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                DispatchQueue.global(qos: .background).async {
                     let mappedItem = Mapper<Show>().map(JSONObject: value)
-                    DispatchQueue.main.sync{
+                    DispatchQueue.main.sync {
                         completion(mappedItem, nil)
                     }
                 }
+            case .failure(let error):
+                completion(nil, error as NSError?)
             }
+        }
     }
 }

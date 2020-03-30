@@ -37,7 +37,7 @@ extension DownloadDetailViewController: DownloadDetailTableViewCellDelegate {
         cell.detailTextLabel?.text = download.fileSize.stringValue
         
         if let image = download.mediaMetadata[MPMediaItemPropertyBackgroundArtwork] as? String, let url = URL(string: image) {
-            cell.imageView?.af_setImage(withURL: url)
+            cell.imageView?.af.setImage(withURL: url)
         } else {
             cell.imageView?.image = UIImage(named: "Episode Placeholder")
         }

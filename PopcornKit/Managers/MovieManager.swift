@@ -1,12 +1,10 @@
-
-
 import ObjectMapper
 
 open class MovieManager: NetworkManager {
-    
+
     /// Creates new instance of MovieManager class
     public static let shared = MovieManager()
-    
+
     /// Possible filters used in API call.
     public enum Filters: String {
         case trending = "trending"
@@ -14,9 +12,9 @@ open class MovieManager: NetworkManager {
         case rating = "rating"
         case date = "last added"
         case year = "year"
-        
+
         public static let array = [trending, popularity, rating, date, year]
-        
+
         public var string: String {
             switch self {
             case .popularity:
@@ -32,7 +30,7 @@ open class MovieManager: NetworkManager {
             }
         }
     }
-    
+
     /**
      Load Movies from API.
      
@@ -45,25 +43,26 @@ open class MovieManager: NetworkManager {
      - Parameter completion: Completion handler for the request. Returns array of movies upon success, error upon failure.
      */
     open func load(
-        _ page: Int,
-        filterBy filter: Filters,
-        genre: Genres,
-        searchTerm: String?,
-        orderBy order: Orders,
-        completion: @escaping ([Movie]?, NSError?) -> Void) {
+            _ page: Int,
+            filterBy filter: Filters,
+            genre: Genres,
+            searchTerm: String?,
+            orderBy order: Orders,
+            completion: @escaping ([Movie]?, NSError?) -> Void) {
         var params: [String: Any] = ["sort": filter.rawValue, "order": order.rawValue, "genre": genre.rawValue.replacingOccurrences(of: " ", with: "-").lowercased()]
-        if let searchTerm = searchTerm , !searchTerm.isEmpty {
+        if let searchTerm = searchTerm, !searchTerm.isEmpty {
             params["keywords"] = searchTerm
         }
         self.manager.request(PopcornMovies.base + PopcornMovies.movies + "/\(page)", parameters: params).validate().responseJSON { response in
-            guard let value = response.result.value else {
-                completion(nil, response.result.error as NSError?)
-                return
+            switch response.result {
+            case .success(let value):
+                completion(Mapper<Movie>().mapArray(JSONObject: value), nil)
+            case .failure(let error):
+                completion(nil, error as NSError?)
             }
-            completion(Mapper<Movie>().mapArray(JSONObject: value), nil)
         }
     }
-    
+
     /**
      Get more movie information.
      
@@ -73,13 +72,18 @@ open class MovieManager: NetworkManager {
      */
     open func getInfo(_ imdbId: String, completion: @escaping (Movie?, NSError?) -> Void) {
         self.manager.request(PopcornMovies.base + PopcornMovies.movie + "/\(imdbId)").validate().responseJSON { response in
-            guard let value = response.result.value else {completion(nil, response.result.error as NSError?); return}
-            DispatchQueue.global(qos: .background).async {
-                let mappedItem = Mapper<Movie>().map(JSONObject: value)
-                DispatchQueue.main.sync{completion(mappedItem, nil)}
+            switch response.result {
+            case .success(let value):
+                DispatchQueue.global(qos: .background).async {
+                    let mappedItem = Mapper<Movie>().map(JSONObject: value)
+                    DispatchQueue.main.sync {
+                        completion(mappedItem, nil)
+                    }
+                }
+            case .failure(let error):
+                completion(nil, error as NSError?)
             }
-            
         }
     }
-    
+
 }

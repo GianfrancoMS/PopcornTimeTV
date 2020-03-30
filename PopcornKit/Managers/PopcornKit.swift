@@ -1,5 +1,3 @@
-
-
 import Alamofire
 
 /**
@@ -14,19 +12,19 @@ import Alamofire
  - Parameter completion: Completion handler for the request. Returns array of shows upon success, error upon failure.
  */
 public func loadShows(
-    _ page: Int = 1,
-    filterBy filter: ShowManager.Filters = .popularity,
-    genre: ShowManager.Genres = .all,
-    searchTerm: String? = nil,
-    orderBy order: ShowManager.Orders = .descending,
-    completion: @escaping ([Show]?, NSError?) -> Void) {
+        _ page: Int = 1,
+        filterBy filter: ShowManager.Filters = .popularity,
+        genre: ShowManager.Genres = .all,
+        searchTerm: String? = nil,
+        orderBy order: ShowManager.Orders = .descending,
+        completion: @escaping ([Show]?, NSError?) -> Void) {
     ShowManager.shared.load(
-        page,
-        filterBy: filter,
-        genre: genre,
-        searchTerm: searchTerm,
-        orderBy: order,
-        completion: completion)
+            page,
+            filterBy: filter,
+            genre: genre,
+            searchTerm: searchTerm,
+            orderBy: order,
+            completion: completion)
 }
 
 /**
@@ -68,19 +66,19 @@ public func getEpisodeInfo(_ tvdbId: Int, completion: @escaping (Episode?, NSErr
  - Parameter completion: Completion handler for the request. Returns array of movies upon success, error upon failure.
  */
 public func loadMovies(
-    _ page: Int = 1,
-    filterBy filter: MovieManager.Filters = .popularity,
-    genre: MovieManager.Genres = .all,
-    searchTerm: String? = nil,
-    orderBy order: MovieManager.Orders = .descending,
-    completion: @escaping ([Movie]?, NSError?) -> Void) {
+        _ page: Int = 1,
+        filterBy filter: MovieManager.Filters = .popularity,
+        genre: MovieManager.Genres = .all,
+        searchTerm: String? = nil,
+        orderBy order: MovieManager.Orders = .descending,
+        completion: @escaping ([Movie]?, NSError?) -> Void) {
     MovieManager.shared.load(
-        page,
-        filterBy: filter,
-        genre: genre,
-        searchTerm: searchTerm,
-        orderBy: order,
-        completion: completion)
+            page,
+            filterBy: filter,
+            genre: genre,
+            searchTerm: searchTerm,
+            orderBy: order,
+            completion: completion)
 }
 
 /**
@@ -104,13 +102,18 @@ public func getMovieInfo(_ imdbId: String, completion: @escaping (Movie?, NSErro
  - Parameter completion:    Completion handler for the request. Returns downloaded torrent url upon success, error upon failure.
  */
 public func downloadTorrentFile(_ path: String, completion: @escaping (String?, NSError?) -> Void) {
-    var finalPath: URL!
-    Alamofire.download(path) { (temporaryURL, response) -> (destinationURL: URL, options: DownloadRequest.DownloadOptions) in
-        finalPath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(response.suggestedFilename!)
-        return (finalPath, .removePreviousFile)
-    }.validate().response { response in
-        guard response.error == nil else {completion(nil, response.error as NSError?); return }
-        completion(finalPath.path, nil)
+    AF.download(path).validate().response { downloadResponse in
+        switch (downloadResponse.result) {
+        case .success:
+            if let suggestedFilename = downloadResponse.response?.suggestedFilename {
+                let finalPath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(suggestedFilename)
+                completion(finalPath.path, nil)
+            } else {
+                completion(nil, nil)
+            }
+        case .failure:
+            completion(nil, downloadResponse.error as NSError?)
+        }
     }
 }
 
@@ -124,25 +127,26 @@ public func downloadTorrentFile(_ path: String, completion: @escaping (String?, 
  - Parameter completion:    Completion handler for the request. Returns downloaded subtitle url upon success, error upon failure.
  */
 public func downloadSubtitleFile(
-    _ path: String,
-    fileName suggestedName: String? = nil,
-    downloadDirectory directory: URL = URL(fileURLWithPath: NSTemporaryDirectory()),
-    completion: @escaping (URL?, NSError?) -> Void) {
-    var fileUrl: URL!
-    Alamofire.download(path) { (temporaryURL, response) -> (destinationURL: URL, options: DownloadRequest.DownloadOptions) in
-        let fileName = suggestedName ?? response.suggestedFilename!
-        let downloadDirectory = directory.appendingPathComponent("Subtitles")
-        if !FileManager.default.fileExists(atPath: downloadDirectory.path) {
-            try? FileManager.default.createDirectory(at: downloadDirectory, withIntermediateDirectories: true, attributes: nil)
+        _ path: String,
+        fileName suggestedName: String? = nil,
+        downloadDirectory directory: URL = URL(fileURLWithPath: NSTemporaryDirectory()),
+        completion: @escaping (URL?, NSError?) -> Void) {
+    AF.download(path).validate().response { downloadResponse in
+        switch (downloadResponse.result) {
+        case .success:
+            if let suggestedFilename = suggestedName ?? downloadResponse.response?.suggestedFilename {
+                let downloadDirectory = directory.appendingPathComponent("Subtitles")
+                if !FileManager.default.fileExists(atPath: downloadDirectory.path) {
+                    try? FileManager.default.createDirectory(at: downloadDirectory, withIntermediateDirectories: true, attributes: nil)
+                }
+                let fileUrl = downloadDirectory.appendingPathComponent(suggestedFilename)
+                completion(fileUrl, nil)
+            } else {
+                completion(nil, nil)
+            }
+        case .failure:
+            completion(nil, downloadResponse.error as NSError?)
         }
-        fileUrl = downloadDirectory.appendingPathComponent(fileName)
-        return (fileUrl, .removePreviousFile)
-    }.validate().response { response in
-        if let error = response.error as NSError? {
-            completion(nil, error)
-            return
-        }
-        completion(fileUrl, nil)
     }
 }
 

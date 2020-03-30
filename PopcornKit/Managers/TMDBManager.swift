@@ -1,14 +1,12 @@
-
-
 import Foundation
 import Alamofire
 import SwiftyJSON
 
 open class TMDBManager: NetworkManager {
-    
+
     /// Creates new instance of TMDBManager class
     public static let shared = TMDBManager()
-    
+
     /**
      Load movie posters from TMDB. Either a tmdb id or an imdb id must be passed in.
      
@@ -19,29 +17,38 @@ open class TMDBManager: NetworkManager {
      - Parameter completion:        The completion handler for the request containing an optional tmdb id, largeImageUrl and an optional error.
      */
     open func getPoster(forMediaOfType type: TMDB.MediaType, withImdbId imdb: String? = nil, orTMDBId tmdb: Int? = nil, completion: @escaping (Int?, String?, NSError?) -> Void) {
-        
+
         guard let id = tmdb else {
-            guard let id = imdb else { completion(nil, nil, nil); return }
+            guard let id = imdb else {
+                completion(nil, nil, nil); return
+            }
             TraktManager.shared.getTMDBId(forImdbId: id, completion: { (tmdb, error) in
-                guard let tmdb = tmdb else { completion(nil, nil, error); return }
+                guard let tmdb = tmdb else {
+                    completion(nil, nil, error); return
+                }
                 self.getPoster(forMediaOfType: type, orTMDBId: tmdb, completion: completion)
             })
             return
         }
-        
+
         self.manager.request(TMDB.base + "/" + type.rawValue + "/\(id)" + TMDB.images, parameters: TMDB.defaultHeaders).validate().responseJSON { (response) in
-            guard let value = response.result.value else { completion(id, nil, response.result.error as NSError?); return }
-            let responseDict = JSON(value)
-            
-            var image: String?
-            if let poster = responseDict["posters"].first?.1["file_path"].string {
-                image = "https://image.tmdb.org/t/p/w780" + poster
+            switch response.result {
+            case .success(let value):
+                let responseDict = JSON(value)
+
+                var image: String?
+                if let poster = responseDict["posters"].first?.1["file_path"].string {
+                    image = "https://image.tmdb.org/t/p/w780" + poster
+                }
+                completion(id, image, nil)
+                image = nil
+            case .failure(let error):
+                completion(id, nil, error as NSError?);
+                return
             }
-            completion(id, image, nil)
-            image = nil
         }
     }
-    
+
     /**
      Load season posters from TMDB. Either a tmdb id or an imdb id must be passed in.
      
@@ -52,28 +59,37 @@ open class TMDBManager: NetworkManager {
      - Parameter completion:    The completion handler for the request containing an optional tmdb id, image and an optional error.
      */
     open func getSeasonPoster(ofShowWithImdbId imdb: String? = nil, orTMDBId tmdb: Int? = nil, season: Int, completion: @escaping (Int?, String?, NSError?) -> Void) {
-        
+
         guard let id = tmdb else {
-            guard let id = imdb else { completion(nil, nil, nil); return }
+            guard let id = imdb else {
+                completion(nil, nil, nil); return
+            }
             TraktManager.shared.getTMDBId(forImdbId: id, completion: { (tmdb, error) in
-                guard let tmdb = tmdb else { completion(nil, nil, error); return }
+                guard let tmdb = tmdb else {
+                    completion(nil, nil, error); return
+                }
                 self.getSeasonPoster(orTMDBId: tmdb, season: season, completion: completion)
             })
             return
         }
-        
+
         self.manager.request(TMDB.base + TMDB.tv + "/\(id)" + TMDB.season + "/\(season)" + TMDB.images, parameters: TMDB.defaultHeaders).validate().responseJSON { (response) in
-            guard let value = response.result.value else { completion(id, nil, response.result.error as NSError?); return }
-            let responseDict = JSON(value)
-            
-            var image: String?
-            if let poster = responseDict["posters"].first?.1["file_path"].string {
-                image = "https://image.tmdb.org/t/p/w500" + poster
+            switch response.result {
+            case .success(let value):
+                let responseDict = JSON(value)
+
+                var image: String?
+                if let poster = responseDict["posters"].first?.1["file_path"].string {
+                    image = "https://image.tmdb.org/t/p/w500" + poster
+                }
+                completion(id, image, nil)
+            case .failure(let error):
+                completion(id, nil, error as NSError?);
+                return
             }
-            completion(id, image, nil)
         }
     }
-    
+
     /**
      Load episode screenshots from TMDB. Either a tmdb id or an imdb id must be passed in.
      
@@ -85,28 +101,37 @@ open class TMDBManager: NetworkManager {
      - Parameter completion:        The completion handler for the request containing an optional tmdb id, largeImageUrl and an optional error.
      */
     open func getEpisodeScreenshots(forShowWithImdbId imdb: String? = nil, orTMDBId tmdb: Int? = nil, season: Int, episode: Int, completion: @escaping (Int?, String?, NSError?) -> Void) {
-        
+
         guard let id = tmdb else {
-            guard let id = imdb else { completion(nil, nil, nil); return }
+            guard let id = imdb else {
+                completion(nil, nil, nil); return
+            }
             TraktManager.shared.getTMDBId(forImdbId: id, completion: { (tmdb, error) in
-                guard let tmdb = tmdb else { completion(nil, nil, error); return }
+                guard let tmdb = tmdb else {
+                    completion(nil, nil, error); return
+                }
                 self.getEpisodeScreenshots(orTMDBId: tmdb, season: season, episode: episode, completion: completion)
             })
             return
         }
-        
+
         self.manager.request(TMDB.base + TMDB.tv + "/\(id)" + TMDB.season + "/\(season)" + TMDB.episode + "/\(episode)" + TMDB.images, parameters: TMDB.defaultHeaders).validate().responseJSON { (response) in
-            guard let value = response.result.value else { completion(id, nil, response.result.error as NSError?); return }
-            let responseDict = JSON(value)
-            
-            var image: String?
-            if let screenshot = responseDict["stills"].first?.1["file_path"].string {
-                image = "https://image.tmdb.org/t/p/w1280" + screenshot
+            switch response.result {
+            case .success(let value):
+                let responseDict = JSON(value)
+
+                var image: String?
+                if let screenshot = responseDict["stills"].first?.1["file_path"].string {
+                    image = "https://image.tmdb.org/t/p/w1280" + screenshot
+                }
+                completion(id, image, nil)
+            case .failure(let error):
+                completion(id, nil, error as NSError?);
+                return
             }
-            completion(id, image, nil)
         }
     }
-    
+
     /**
      Load character headshots from TMDB. Either a tmdb id or an imdb id must be passed in.
      
@@ -116,28 +141,37 @@ open class TMDBManager: NetworkManager {
      - Parameter completion:            The completion handler for the request containing an optional tmdb id, largeImageUrl and an optional error.
      */
     open func getCharacterHeadshots(forPersonWithImdbId imdb: String? = nil, orTMDBId tmdb: Int? = nil, completion: @escaping (Int?, String?, NSError?) -> Void) {
-        
+
         guard let id = tmdb else {
-            guard let id = imdb else { completion(nil, nil, nil); return }
+            guard let id = imdb else {
+                completion(nil, nil, nil); return
+            }
             TraktManager.shared.getTMDBId(forImdbId: id, completion: { (tmdb, error) in
-                guard let tmdb = tmdb else { completion(nil, nil, error); return }
+                guard let tmdb = tmdb else {
+                    completion(nil, nil, error); return
+                }
                 self.getCharacterHeadshots(orTMDBId: tmdb, completion: completion)
             })
             return
         }
-        
+
         self.manager.request(TMDB.base + TMDB.person + "/\(id)" + TMDB.images, parameters: TMDB.defaultHeaders).validate().responseJSON { (response) in
-            guard let value = response.result.value else { completion(id, nil, response.result.error as NSError?); return }
-            let responseDict = JSON(value)
-            
-            var image: String?
-            if let headshot = responseDict["profiles"].first?.1["file_path"].string {
-                image = "https://image.tmdb.org/t/p/w780" + headshot
+            switch response.result {
+            case .success(let value):
+                let responseDict = JSON(value)
+
+                var image: String?
+                if let headshot = responseDict["profiles"].first?.1["file_path"].string {
+                    image = "https://image.tmdb.org/t/p/w780" + headshot
+                }
+                completion(id, image, nil)
+            case .failure(let error):
+                completion(id, nil, error as NSError?);
+                return
             }
-            completion(id, image, nil)
         }
     }
-    
+
     /**
      Load Movie or TV Show logos from Fanart.tv.
      
@@ -148,14 +182,18 @@ open class TMDBManager: NetworkManager {
      */
     open func getLogo(forMediaOfType type: Trakt.MediaType, id: String, completion: @escaping (String?, NSError?) -> Void) {
         self.manager.request(Fanart.base + (type == .movies ? Fanart.movies : Fanart.tv) + "/\(id)", parameters: Fanart.defaultParameters).validate().responseJSON { (response) in
-            guard let value = response.result.value else { completion(nil, response.result.error as NSError?); return }
-            let responseDict = JSON(value)
-            
-            let typeString = type == .movies ? "movie" : "tv"
-            let image = responseDict["hd\(typeString)logo"].first(where: { $0.1["lang"].string == "en" })?.1["url"].string
+            switch response.result {
+            case .success(let value):
+                let responseDict = JSON(value)
 
-            completion(image, nil)
+                let typeString = type == .movies ? "movie" : "tv"
+                let image = responseDict["hd\(typeString)logo"].first(where: { $0.1["lang"].string == "en" })?.1["url"].string
+
+                completion(image, nil)
+            case .failure(let error):
+                completion(id, error as NSError?);
+                return
+            }
         }
-        
     }
 }
