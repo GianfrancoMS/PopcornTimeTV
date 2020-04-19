@@ -18,10 +18,8 @@ target 'PopcornTimeiOS' do
     platform :ios, '13.0'
     pods
     pod 'FloatRatingView', '~> 4.0'
-    pod 'AlamofireNetworkActivityIndicator', '~> 3.1.0'
     pod 'google-cast-sdk-no-bluetooth', '~> 4.4.7'
     pod 'OBSlider', '~> 1.1.1'
-    pod '1PasswordExtension', '~> 1.8.6'
     pod 'MobileVLCKit', '~> 3.3.10'
 end
 

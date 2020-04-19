@@ -6,7 +6,6 @@ import Reachability
 import ObjectMapper
 
 #if os(iOS)
-    import AlamofireNetworkActivityIndicator
     import GoogleCast
 #endif
 
@@ -63,8 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             let font = UIFont.systemFont(ofSize: 38, weight: UIFont.Weight.heavy)
             UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
         #elseif os(iOS)
-            NetworkActivityIndicatorManager.shared.isEnabled = true
-            
             // SDK throws error if shared instance has already been initialised and doesn't mark function as throwing on Swift. Although this produces a compile time warning, it is necessary for the app to not crash while running on an actual device and should not be removed.
              GCKCastContext.setSharedInstanceWith(GCKCastOptions(discoveryCriteria: GCKDiscoveryCriteria(applicationID: kGCKDefaultMediaReceiverApplicationID)))
         
