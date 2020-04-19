@@ -1,10 +1,10 @@
 PODS:
   - 1PasswordExtension (1.8.6)
-  - Alamofire (5.0.5)
-  - AlamofireImage (4.0.3):
-    - Alamofire (< 6.0.0, >= 5.0.2)
-  - AlamofireNetworkActivityIndicator (3.0.1):
-    - Alamofire (~> 5.0)
+  - Alamofire (5.1.0)
+  - AlamofireImage (4.1.0):
+    - Alamofire (~> 5.1)
+  - AlamofireNetworkActivityIndicator (3.1.0):
+    - Alamofire (~> 5.1)
   - FloatRatingView (4.0)
   - GCDWebServer (3.5.3):
     - GCDWebServer/Core (= 3.5.3)
@@ -32,9 +32,9 @@ PODS:
 
 DEPENDENCIES:
   - 1PasswordExtension (~> 1.8.6)
-  - Alamofire (~> 5.0.5)
-  - AlamofireImage (~> 4.0.3)
-  - AlamofireNetworkActivityIndicator (~> 3.0.1)
+  - Alamofire (~> 5.1.0)
+  - AlamofireImage (~> 4.1.0)
+  - AlamofireNetworkActivityIndicator (~> 3.1.0)
   - FloatRatingView (~> 4.0)
   - google-cast-sdk-no-bluetooth (~> 4.4.7)
   - Locksmith (~> 4.0.0)
@@ -91,9 +91,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   1PasswordExtension: f97cc80ae58053c331b2b6dc8843ba7103b33794
-  Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
-  AlamofireImage: 3d1a2010519e58675318735580eb856e88840ff7
-  AlamofireNetworkActivityIndicator: f7d4cd8d12bcf61dc569cbe000b0c35e9c8d8d32
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
+  AlamofireNetworkActivityIndicator: 6564782bd7b9e6c430ae67d9277af01907b01ca4
   FloatRatingView: bb6bdddfbeec51b1d387b4bd50abc27b4dfccd48
   GCDWebServer: c0ab22c73e1b84f358d1e2f74bf6afd1c60829f2
   google-cast-sdk-no-bluetooth: 197acace9d5a78380bdaef8d45439b2250fa050b
@@ -112,6 +112,6 @@ SPEC CHECKSUMS:
   TVVLCKit: f638dcaf37a6ba4027161cbc27be86f0cb02d2f7
   XCDYouTubeKit: cdad9e696f991aac2739c5b25586c81f1301ba30
 
-PODFILE CHECKSUM: 1b09cdd45b93d063569251b3ac4b1b1e0a1b884d
+PODFILE CHECKSUM: fcc9e9107a943c6f995b701ff918c1531b82783f
 
 COCOAPODS: 1.9.1
