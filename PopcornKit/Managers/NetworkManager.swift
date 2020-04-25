@@ -107,12 +107,8 @@ public struct Fanart {
 
 public struct OpenSubtitles {
     static let base = "https://rest.opensubtitles.org/"
-    static let userAgent = "Popcorn Time v1"
-
-//    static let logIn = "LogIn"
-//    static let logOut = "LogOut"
+    static let userAgent = "Popcorn Time NodeJS"
     static let search = "search/"
-
     static let defaultHeaders = HTTPHeaders(["User-Agent": OpenSubtitles.userAgent])
 }
 
