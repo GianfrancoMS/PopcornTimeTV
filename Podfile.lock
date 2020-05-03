@@ -25,7 +25,7 @@ PODS:
   - SwiftyTimer (2.1.1)
   - TvOSMoreButton (1.3.0)
   - TVVLCKit (3.3.10)
-  - XCDYouTubeKit (2.12.0)
+  - XCDYouTubeKit (2.13.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.1.0)
@@ -44,7 +44,7 @@ DEPENDENCIES:
   - SwiftyTimer (from `https://github.com/radianttap/SwiftyTimer`, branch `swift5`)
   - TvOSMoreButton (~> 1.3.0)
   - TVVLCKit (~> 3.3.10)
-  - XCDYouTubeKit (~> 2.12.0)
+  - XCDYouTubeKit (~> 2.13.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -101,8 +101,8 @@ SPEC CHECKSUMS:
   SwiftyTimer: e5bee059771ccb4af4f3a6cef4b50d12a7f26bd9
   TvOSMoreButton: 293f34e3db5e4e8876ccb110632b40f9318dec7d
   TVVLCKit: f638dcaf37a6ba4027161cbc27be86f0cb02d2f7
-  XCDYouTubeKit: cdad9e696f991aac2739c5b25586c81f1301ba30
+  XCDYouTubeKit: 4902fca1721b593112b6607c509a089e911294f3
 
-PODFILE CHECKSUM: 90f13fc59f9d976956ef222bf3943c15cec3fe11
+PODFILE CHECKSUM: c635d0bb07dd59113f94630a75bafad871707867
 
 COCOAPODS: 1.9.1

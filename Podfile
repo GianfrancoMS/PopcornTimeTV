@@ -5,7 +5,7 @@ source 'https://github.com/PopcornTimeTV/Specs'
 
 def pods
     pod 'PopcornTorrent', '~> 1.3.15'
-    pod 'XCDYouTubeKit', '~> 2.12.0'
+    pod 'XCDYouTubeKit', '~> 2.13.0'
     pod 'Alamofire', '~> 5.1.0'
     pod 'AlamofireImage', '~> 4.1.0'
     pod 'SwiftyTimer', :git => 'https://github.com/radianttap/SwiftyTimer', :branch => 'swift5'
