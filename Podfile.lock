@@ -14,7 +14,7 @@ PODS:
   - Locksmith (4.0.0)
   - MarqueeLabel (4.0.2)
   - MBCircularProgressBar (0.3.5)
-  - MobileVLCKit (3.3.10)
+  - MobileVLCKit (3.3.11)
   - ObjectMapper (3.5.2)
   - OBSlider (1.1.1)
   - PopcornTorrent (1.3.15):
@@ -24,27 +24,27 @@ PODS:
   - SwiftyJSON (5.0.0)
   - SwiftyTimer (2.1.1)
   - TvOSMoreButton (1.3.0)
-  - TVVLCKit (3.3.10)
+  - TVVLCKit (3.3.11)
   - XCDYouTubeKit (2.13.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.1.0)
-  - AlamofireImage (~> 4.1.0)
-  - FloatRatingView (~> 4.0)
-  - google-cast-sdk-no-bluetooth (~> 4.4.7)
-  - Locksmith (~> 4.0.0)
-  - MarqueeLabel (~> 4.0.2)
-  - MBCircularProgressBar (~> 0.3.5-1)
-  - MobileVLCKit (~> 3.3.10)
-  - ObjectMapper (~> 3.5.2)
-  - OBSlider (~> 1.1.1)
-  - PopcornTorrent (~> 1.3.15)
+  - Alamofire (= 5.1.0)
+  - AlamofireImage (= 4.1.0)
+  - FloatRatingView (= 4.0)
+  - google-cast-sdk-no-bluetooth (= 4.4.7)
+  - Locksmith (= 4.0.0)
+  - MarqueeLabel (= 4.0.2)
+  - MBCircularProgressBar (= 0.3.5-1)
+  - MobileVLCKit (= 3.3.11)
+  - ObjectMapper (= 3.5.2)
+  - OBSlider (= 1.1.1)
+  - PopcornTorrent (= 1.3.15)
   - Reachability (from `https://github.com/tonymillion/Reachability`)
-  - SwiftyJSON (~> 5.0.0)
+  - SwiftyJSON (= 5.0.0)
   - SwiftyTimer (from `https://github.com/radianttap/SwiftyTimer`, branch `swift5`)
-  - TvOSMoreButton (~> 1.3.0)
-  - TVVLCKit (~> 3.3.10)
-  - XCDYouTubeKit (~> 2.13.0)
+  - TvOSMoreButton (= 1.3.0)
+  - TVVLCKit (= 3.3.11)
+  - XCDYouTubeKit (= 2.13.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -91,7 +91,7 @@ SPEC CHECKSUMS:
   Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
   MarqueeLabel: f762aa681ae201f66c1d511858b171f75d83013a
   MBCircularProgressBar: 29e6df5e8683ff2375a291792a5988a16dd78c8e
-  MobileVLCKit: 34a4d22c48ea48a36c2a6fdf290d4ea094869ac0
+  MobileVLCKit: 8b7f955e96686d3aea9660fd711215ea34bcebc8
   ObjectMapper: b53ae947d370bf89423e86be7d4e2d2b2a8d3f40
   OBSlider: 38853ebbb9cc6978a9b7ddc0d4f525588e8bb294
   PopcornTorrent: 343ff0e04ba370764a9cf27c35685463f7428b90
@@ -100,9 +100,9 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   SwiftyTimer: e5bee059771ccb4af4f3a6cef4b50d12a7f26bd9
   TvOSMoreButton: 293f34e3db5e4e8876ccb110632b40f9318dec7d
-  TVVLCKit: f638dcaf37a6ba4027161cbc27be86f0cb02d2f7
+  TVVLCKit: 56f8ea4eaf17c2f46902590f758bf9083ac230c9
   XCDYouTubeKit: 4902fca1721b593112b6607c509a089e911294f3
 
-PODFILE CHECKSUM: c635d0bb07dd59113f94630a75bafad871707867
+PODFILE CHECKSUM: 870568c45d9ab79821d1d2d32ad07aa38c6911db
 
 COCOAPODS: 1.9.1
